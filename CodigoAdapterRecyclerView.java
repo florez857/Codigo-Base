@@ -7,7 +7,7 @@
 // en el adaqpter se deben sobre escribir tres metodos onBindHOlder ,onCreateViewHOlder y getItemCount
 //
 //
-//
+//en la ultima parte del codigo se tiene implementado el manejo de eventos 
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
@@ -101,3 +101,66 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
    }
  
 }
+
+
+
+// manejo de eventos 
+
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
+    // ...
+
+    //1//
+    /*****Creating OnItemClickListener *****/
+
+    // (2) declaramos un oyente 
+    private OnItemClickListener listener;
+    // 1   define la interfaz
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+   //(2)
+    // Define the method that allows the parent activity or fragment to define the listener
+   //defino el metodo que me permite que la actividad o fragmento envie la implementacion del listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView tvName;
+        public TextView tvHometown;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+            this.tvName = (TextView) itemView.findViewById(R.id.tvName);
+            this.tvHometown = (TextView) itemView.findViewById(R.id.tvHometown);
+            // Setup the click listener
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Triggers click upwards to the adapter on click
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(itemView, position);//(4) desencadeno los eventos para el listener 
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    // ...
+}
+//Entonces podemos adjuntar un controlador de clic al adaptador con:
+
+
+//(3) implemento el oyente y lo adjunto a la clase hijo 
+// en la actividad o fragmento 
+ContactsAdapter adapter = ...;
+adapter.setOnItemClickListener(new ContactsAdapter.OnItemClickListener() {
+    @Override
+    public void onItemClick(View view, int position) {
+        String name = users.get(position).name;
+        Toast.makeText(UserListActivity.this, name + " was clicked!", Toast.LENGTH_SHORT).show();
+    }
+});
