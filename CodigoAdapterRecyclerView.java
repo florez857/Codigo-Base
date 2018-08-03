@@ -1,16 +1,31 @@
+// Para implementar un adapter de un recyclerView se necesita extender de la clase 
+// RecyclerView.Adapter se debe colocar el nombre del holder como tipo de dato <NombreAdapter.NombreClaseInterna > que necesita para que
+// contenga la informacion de cada elemento de la lista , para esto se debe definir una clase interna  
+// que se extienda de RecyclerView.ViewHolder, en esta clase definimos todos los elementos que tendra 
+// nuestro  item , se debe crear un constructor para esta clase ,el constructo recibe un view y con el metodo findById 
+// seobtiene cada vista y se la asocia  a la vista declarada en la calse.
+// en el adaqpter se deben sobre escribir tres metodos onBindHOlder ,onCreateViewHOlder y getItemCount
+//
+//
+//
+
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
    private final LayoutInflater mInflater;
-   private List<Word> mWords; // Cached copy of words
+   private List<Word> mWords; // lista de objetos a mostrar en el recycler view  
 
-   WordListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+   WordListAdapter(Context context) { 
+      
+      mInflater = LayoutInflater.from(context); }
 
+   // creamos el holder donde se le pasa el tiem view 
    @Override
    public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
        View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
        return new WordViewHolder(itemView);
    }
 
+   //asociamos los datos de la lista a un holder creado
    @Override
    public void onBindViewHolder(WordViewHolder holder, int position) {
        if (mWords != null) {
@@ -22,13 +37,15 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
        }
    }
 
+   // metodo para acutalizar la lista de datos
    void setWords(List<Word> words){
-       mWords = words;
-       notifyDataSetChanged();
+       mWords = words;//
+       notifyDataSetChanged();//notifica de los cambios al adapter y redibuja la interfaz
    }
 
-   // getItemCount() is called many times, and when it is first called,
-   // mWords has not been updated (means initially, it's null, and we can't return null).
+   // getItemCount() este metodo es llamado siempre, y cuando es llamado por primera vez,
+   // se debe hacer una comprobacion de que este objeto es distinto de null
+   //devuelve la cantidad de elementos de la lista 
    @Override
    public int getItemCount() {
        if (mWords != null)
@@ -36,6 +53,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
        else return 0;
    }
 
+    // clase interna para el viewHolder
    class WordViewHolder extends RecyclerView.ViewHolder {
        private final TextView wordItemView;
 
