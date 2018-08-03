@@ -1,5 +1,6 @@
 # Codigo-Base
 codigos de utilidad 
+
 //manejo de eventos , comunicacion de un objeto hijo con el objeto padre 
 https://guides.codepath.com/android/Creating-Custom-Listeners#overview
 
