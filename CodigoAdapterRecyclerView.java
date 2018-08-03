@@ -8,6 +8,7 @@
 //
 //
 //en la ultima parte del codigo se tiene implementado el manejo de eventos 
+// esto consiste de 4 pasos que estan enumerados como (1).(2),(3) y (4).
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
