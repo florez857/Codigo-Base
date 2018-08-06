@@ -19,3 +19,10 @@ https://legacy.gitbook.com/@google-developer-training
 https://code.tutsplus.com/series/android-architecture-components--cms-1208
 
 
+//tutorial Recyler view 
+
+https://therubberduckdev.wordpress.com/2017/11/09/handle-data-change-in-recyclerview-using-diffutil/
+
+
+//libros varios 
+https://issuu.com/nadirchine/docs/androids-architecture-components
